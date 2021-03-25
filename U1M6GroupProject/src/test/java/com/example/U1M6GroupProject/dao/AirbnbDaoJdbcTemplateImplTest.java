@@ -1,7 +1,6 @@
 package com.example.U1M6GroupProject.dao;
 
 import com.example.U1M6GroupProject.model.Airbnb;
-import com.example.U1M6GroupProject.model.Customer;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;

@@ -1,9 +1,10 @@
 package com.example.U1M6GroupProject.dao;
 
-import com.example.U1M6GroupProject.model.Airbnb;
+
 import com.example.U1M6GroupProject.model.Customer;
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -33,8 +34,82 @@ public class CustomerDaoJdbcTemplateImplTest {
     public void tearDown() throws Exception {
     }
 
-//    Customer customer = new Customer();
-//        customer.setName("House");
-//        customer.setDescription("blah blah blah");
-//        customer.setDaily_rate(200.0);
+    @Test
+    public void addGetDeleteCustomer() {
+        //ARRANGE
+        Customer customer = new Customer();
+        customer.setFirst_name("Daniele");
+        customer.setLast_name("Tenga");
+        customer.setEmail("danieletenga@gmail.com");
+        customer.setPhone("123456789");
+
+        customer = customerDao.addCustomer(customer);
+
+        //ACT
+        //add
+        Customer customer2 = customerDao.getCustomer(customer.getCustomer_id());
+        //ASSERT
+        assertEquals(customer, customer2);
+
+        //ACT
+        //get
+        customerDao.deleteCustomer(customer.getCustomer_id());
+
+        customer2 = customerDao.getCustomer(customer.getCustomer_id());
+        //ASSERT
+        assertNull(customer2);
+    }
+
+    @Test
+    public void getAllCustomers() {
+
+        Customer customer = new Customer();
+        //id needed to get all customers
+        customer.setCustomer_id(1);
+        customer.setFirst_name("Daniele");
+        customer.setLast_name("Tenga");
+        customer.setEmail("danieletenga@gmail.com");
+        customer.setPhone("123456789");
+
+        customerDao.addCustomer(customer);
+
+        customer = new Customer();
+        //id needed here as well
+        customer.setCustomer_id(1);
+        customer.setFirst_name("Daniele");
+        customer.setLast_name("Tenga");
+        customer.setEmail("danieletenga@gmail.com");
+        customer.setPhone("123456789");
+
+        customerDao.addCustomer(customer);
+
+        List<Customer> customerList = customerDao.getAllCustomers();
+
+        assertEquals(customerList.size(), 2);
+    }
+
+    @Test
+    public void updateCustomer() {
+        Customer customer = new Customer();
+        customer.setFirst_name("Daniele");
+        customer.setLast_name("Tenga");
+        customer.setEmail("danieletenga@gmail.com");
+        customer.setPhone("123456789");
+
+        customer = customerDao.addCustomer(customer);
+
+        customer.setFirst_name("Kendall");
+        customer.setLast_name("Arceo");
+        customer.setEmail("kendallarceo@gmail.com");
+        customer.setPhone("123456788");
+
+        customerDao.updateCustomer(customer);
+
+        Customer customer2 = customerDao.getCustomer(customer.getCustomer_id());
+        assertEquals(customer,customer2);
+
+    }
+
+
+
 }
