@@ -1,17 +1,26 @@
 package com.example.U1M6GroupProject.dao;
 
 import com.example.U1M6GroupProject.model.Airbnb;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
+
 @Repository
 public class AirbnbDaoJdbcTemplateImpl implements AirbnbDao{
+
+    private JdbcTemplate jdbcTemplate;
 
     // Prepared statement strings
     private static final String INSERT_AIRBNB_SQL =
@@ -27,10 +36,8 @@ public class AirbnbDaoJdbcTemplateImpl implements AirbnbDao{
             "delete from airbnb where room_id = ?";
 
     private static final String UPDATE_AIRBNB_SQL =
-            "update airbnb set room_id = ?, name = ?, description = ?, daily_rate = ? where roaster_id = ?";
+            "update airbnb set name = ?, description = ?, daily_rate = ? where room_id = ?";
 
-
-    private JdbcTemplate jdbcTemplate;
 
     @Autowired
     public AirbnbDaoJdbcTemplateImpl(JdbcTemplate jdbcTemplate) {
@@ -38,13 +45,14 @@ public class AirbnbDaoJdbcTemplateImpl implements AirbnbDao{
         this.jdbcTemplate = jdbcTemplate;
     }
 
+    @Transactional
     @Override
     public Airbnb addAirbnb(Airbnb airbnb) {
         jdbcTemplate.update(INSERT_AIRBNB_SQL,
                 airbnb.getName(),
-                airbnb.getRoom_id(),
-                airbnb.getDaily_rate(),
-                airbnb.getDescription());
+                airbnb.getDescription(),
+                airbnb.getDaily_rate());
+
 
 
         int id = jdbcTemplate.queryForObject("select last_insert_id()", Integer.class);
