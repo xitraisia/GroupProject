@@ -8,7 +8,7 @@ public class Invoice {
     private int customer_id;
     private LocalDate booking_date;
     private LocalDate checkin_date;
-    private LocalDate chechout_date;
+    private LocalDate checkout_date;
     private double late_fee;
     private int room_id;
 
@@ -44,12 +44,12 @@ public class Invoice {
         this.checkin_date = checkin_date;
     }
 
-    public LocalDate getChechout_date() {
-        return chechout_date;
+    public LocalDate getCheckout_date() {
+        return checkout_date;
     }
 
-    public void setChechout_date(LocalDate chechout_date) {
-        this.chechout_date = chechout_date;
+    public void setCheckout_date(LocalDate checkout_date) {
+        this.checkout_date = checkout_date;
     }
 
     public double getLate_fee() {
@@ -73,12 +73,12 @@ public class Invoice {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Invoice invoice = (Invoice) o;
-        return invoice_id == invoice.invoice_id && customer_id == invoice.customer_id && Double.compare(invoice.late_fee, late_fee) == 0 && room_id == invoice.room_id && Objects.equals(booking_date, invoice.booking_date) && Objects.equals(checkin_date, invoice.checkin_date) && Objects.equals(chechout_date, invoice.chechout_date);
+        return invoice_id == invoice.invoice_id && customer_id == invoice.customer_id && Double.compare(invoice.late_fee, late_fee) == 0 && room_id == invoice.room_id && Objects.equals(booking_date, invoice.booking_date) && Objects.equals(checkin_date, invoice.checkin_date) && Objects.equals(checkout_date, invoice.checkout_date);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(invoice_id, customer_id, booking_date, checkin_date, chechout_date, late_fee, room_id);
+        return Objects.hash(invoice_id, customer_id, booking_date, checkin_date, checkout_date, late_fee, room_id);
     }
 
     @Override
@@ -88,7 +88,7 @@ public class Invoice {
                 ", customer_id=" + customer_id +
                 ", booking_date=" + booking_date +
                 ", checkin_date=" + checkin_date +
-                ", chechout_date=" + chechout_date +
+                ", checkout_date=" + checkout_date +
                 ", late_fee=" + late_fee +
                 ", room_id=" + room_id +
                 '}';

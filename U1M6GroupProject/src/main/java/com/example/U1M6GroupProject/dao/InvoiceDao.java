@@ -15,13 +15,15 @@ public interface InvoiceDao {
 
     Invoice addInvoice(Invoice invoice);
 
-    Airbnb getInvoice(int id);
+    Invoice getInvoice(int id);
 
     List<Invoice> getAllInvoice();
 
     void updateInvoice(Invoice invoice);
 
-    void deleteInvoice();
+//    void deleteInvoice();
 
-    List<Invoice> getInvoiceByInvoiceItem(int invoice_item_id);
+    List<Invoice> getInvoiceByCustomer_id(int customer_id);
+
+    void deleteInvoice(int invoice_id);
 }
